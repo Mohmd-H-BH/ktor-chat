@@ -30,7 +30,9 @@ security:
 
 database:
     main:
-        url: "r2dbc:postgresql://dpg-d76ekb4r85hc73bj32bg-a/db_ktor_chat?connectTimeout=1000"
+        #r2dbc:postgresql://dpg-d76ekb4r85hc73bj32bg-a.singapore-postgres.render.com/db_ktor_chat?sslMode=require&connectTimeout=1000
+        #url: "r2dbc:postgresql://dpg-d76ekb4r85hc73bj32bg-a:5432/db_ktor_chat?connectTimeout=1000"
+        url: "r2dbc:postgresql://dpg-d76ekb4r85hc73bj32bg-a.singapore-postgres.render.com/db_ktor_chat?sslMode=require&connectTimeout=1000"
         user: "db_ktor_chat_user"
         driver: "postgresql"
         password: "nRw6AfWOkzX02bD3MpC5qplDBHg4apHV"
