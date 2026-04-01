@@ -33,5 +33,5 @@ COPY --from=build /app/server/rest/build/libs/rest-all.jar /app/server.jar
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-EXPOSE 8080
+EXPOSE 80
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
