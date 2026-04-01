@@ -11,6 +11,10 @@ RUN chmod +x ./gradlew
 
 # Copy all source modules
 COPY server/ server/
+COPY core/ core/
+COPY db/ db/
+COPY client/ client/
+
 
 # Build Ktor fat JAR (task provided by the Ktor Gradle plugin)
 RUN ./gradlew :server:rest:buildFatJar --no-daemon
