@@ -13,7 +13,8 @@ import kotlin.io.path.exists
 fun Application.database() {
     val mode = if (Paths.get("build.gradle.kts").exists()) "test" else "main"
     val (url, user, _, password) = property<DatabaseConfig>("database.$mode")
-    log.info("Using database: $mode")
+    log.info("Using database mode: $mode")
+    log.info("Using database url: $url")
 
     dependencies {
         provide<R2dbcDatabase> {
