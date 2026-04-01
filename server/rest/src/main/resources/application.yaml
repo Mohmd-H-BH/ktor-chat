@@ -30,10 +30,10 @@ security:
 
 database:
     main:
-        url: "r2dbc:postgresql://host.docker.internal:5440/chat"
-        user: username
+        url: "r2dbc:postgresql://dpg-d76ekb4r85hc73bj32bg-a:5432/db_ktor_chat"
+        user: db_ktor_chat_user
         driver: org.postgresql.Driver
-        password: password
+        password: nRw6AfWOkzX02bD3MpC5qplDBHg4apHV
     test:
         url: "r2dbc:h2:file:///../h2/db"
         user: root
