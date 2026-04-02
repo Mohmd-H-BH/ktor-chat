@@ -4,16 +4,17 @@ import io.r2dbc.spi.ConnectionFactories
 import io.r2dbc.spi.ConnectionFactoryOptions
 import io.r2dbc.spi.IsolationLevel
 import io.r2dbc.spi.Option
-import io.ktor.server.application.Application                          // ✅ missing
-import io.ktor.server.application.log                                  // ✅ missing
+import io.ktor.server.config.property
+import io.ktor.server.plugins.di.*
+import io.ktor.server.application.*                            // ✅ missing
 import kotlinx.serialization.Serializable                              // ✅ missing
-import org.jetbrains.exposed.v1.core.SchemaUtils                       // ✅ missing
+import org.jetbrains.exposed.v1.r2dbc.SchemaUtils                       // ✅ missing
 import org.jetbrains.exposed.v1.r2dbc.R2dbcDatabase
 import org.jetbrains.exposed.v1.r2dbc.R2dbcDatabaseConfig
 import org.jetbrains.exposed.v1.r2dbc.transactions.suspendTransaction  // ✅ missing
 import java.nio.file.Paths                                             // ✅ missing
 import java.time.Duration
-
+import kotlin.io.path.exists
 
 fun Application.database() {
     val mode = if (Paths.get("build.gradle.kts").exists().not()) "test" else "main"
