@@ -42,7 +42,8 @@ fun Application.database() {
             .option(ConnectionFactoryOptions.DATABASE, "db_ktor_chat")
             .option(ConnectionFactoryOptions.USER, config.user)
             .option(ConnectionFactoryOptions.PASSWORD, config.password)
-            .option(ConnectionFactoryOptions.CONNECT_TIMEOUT, Duration.ofSeconds(60))
+            .option(ConnectionFactoryOptions.SSL, true)
+            .option(ConnectionFactoryOptions.CONNECT_TIMEOUT, Duration.ofSeconds(1000))
             .build()
         ConnectionFactories.get(options)
 
