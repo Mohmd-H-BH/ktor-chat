@@ -12,6 +12,7 @@ import org.jetbrains.exposed.v1.r2dbc.SchemaUtils                       // ✅ m
 import org.jetbrains.exposed.v1.r2dbc.R2dbcDatabase
 import org.jetbrains.exposed.v1.r2dbc.R2dbcDatabaseConfig
 import org.jetbrains.exposed.v1.r2dbc.transactions.suspendTransaction  // ✅ missing
+import org.jetbrains.exposed.v1.core.vendors.*
 import java.nio.file.Paths                                             // ✅ missing
 import java.time.Duration
 import kotlin.io.path.exists
@@ -53,7 +54,7 @@ fun Application.database() {
         databaseConfig = R2dbcDatabaseConfig {
             defaultMaxAttempts = 3
             defaultR2dbcIsolationLevel = IsolationLevel.READ_COMMITTED
-        }
+            explicitDialect = if (mode == "test") { H2Dialect() } else { PostgreSQLDialect() }
     )
 
     dependencies {
