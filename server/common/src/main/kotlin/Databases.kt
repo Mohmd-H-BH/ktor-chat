@@ -55,7 +55,7 @@ fun Application.database() {
             defaultMaxAttempts = 3
             defaultR2dbcIsolationLevel = IsolationLevel.READ_COMMITTED
             explicitDialect = if (mode == "test") { H2Dialect() } else { PostgreSQLDialect() }
-            )
+        }
     )
 
     dependencies {
@@ -67,7 +67,6 @@ fun Application.database() {
             }
         }
     }
-        }
 }
 
 @Serializable
