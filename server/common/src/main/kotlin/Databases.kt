@@ -66,6 +66,7 @@ fun Application.database() {
             }
         }
     }
+        }
 }
 
 @Serializable
