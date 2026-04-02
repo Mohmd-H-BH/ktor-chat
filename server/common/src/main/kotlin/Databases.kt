@@ -3,9 +3,17 @@ package io.ktor.chat
 import io.r2dbc.spi.ConnectionFactories
 import io.r2dbc.spi.ConnectionFactoryOptions
 import io.r2dbc.spi.IsolationLevel
+import io.r2dbc.spi.Option
+import io.ktor.server.application.Application                          // ✅ missing
+import io.ktor.server.application.log                                  // ✅ missing
+import kotlinx.serialization.Serializable                              // ✅ missing
+import org.jetbrains.exposed.v1.core.SchemaUtils                       // ✅ missing
 import org.jetbrains.exposed.v1.r2dbc.R2dbcDatabase
 import org.jetbrains.exposed.v1.r2dbc.R2dbcDatabaseConfig
+import org.jetbrains.exposed.v1.r2dbc.transactions.suspendTransaction  // ✅ missing
+import java.nio.file.Paths                                             // ✅ missing
 import java.time.Duration
+
 
 fun Application.database() {
     val mode = if (Paths.get("build.gradle.kts").exists().not()) "test" else "main"
