@@ -17,7 +17,7 @@ import java.time.Duration
 import kotlin.io.path.exists
 
 fun Application.database() {
-    val mode = if (Paths.get("build.gradle.kts").exists().not()) "test" else "main"
+    val mode = if (Paths.get("build.gradle.kts").exists()) "test" else "main"
     val config = property<DatabaseConfig>("database.$mode")
 
     log.info("Using database mode: $mode")
