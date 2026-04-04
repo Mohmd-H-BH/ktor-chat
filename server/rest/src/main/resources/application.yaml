@@ -33,12 +33,20 @@ database:
         #r2dbc:postgresql://dpg-d76ekb4r85hc73bj32bg-a.singapore-postgres.render.com/db_ktor_chat?sslMode=require&connectTimeout=1000
         #url: "r2dbc:postgresql://dpg-d76ekb4r85hc73bj32bg-a:5432/db_ktor_chat?connectTimeout=1000"
         #url: "r2dbc:postgresql://dpg-d76ekb4r85hc73bj32bg-a.singapore-postgres.render.com/db_ktor_chat?sslMode=require&connectTimeout=1000"
-        url: "dpg-d76ekb4r85hc73bj32bg-a.singapore-postgres.render.com"
-        user: "db_ktor_chat_user"
+        #postgresql://postgres:vKMveVhKoFKDcyicBmzqhvBNIREeggNa@junction.proxy.rlwy.net:22384/railway
+        host: "junction.proxy.rlwy.net"
+        database: "railway"
+        port: 22384
+        secure: "false"
+        user: "postgres"
         driver: "postgresql"
-        password: "nRw6AfWOkzX02bD3MpC5qplDBHg4apHV"
+        password: "vKMveVhKoFKDcyicBmzqhvBNIREeggNa"
     test:
-        url: "r2dbc:h2:file:///../h2/db"
-        user: root
-        driver: org.h2.Driver
+        host: "r2dbc:h2:file:///../h2/db"
+        database: "db"
+        port: 5432
+        secure: "false"
+        user: "root"
+        driver: "org.h2.Driver"
         password: ""
+

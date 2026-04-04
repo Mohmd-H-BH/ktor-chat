@@ -14,15 +14,14 @@ import org.jetbrains.exposed.v1.r2dbc.R2dbcDatabaseConfig
 import org.jetbrains.exposed.v1.r2dbc.transactions.suspendTransaction  // ✅ missing
 import org.jetbrains.exposed.v1.core.vendors.*
 import java.nio.file.Paths                                             // ✅ missing
-import java.time.Duration
 import kotlin.io.path.exists
 
 fun Application.database() {
-    val mode = if (Paths.get("build.gradle.kts").exists()) "test" else "main"
+    val mode = if (Paths.get("build.gradle.kts").exists().not()) "test" else "main"
     val config = property<DatabaseConfig>("database.$mode")
 
     log.info("Using database mode: $mode")
-    log.info("Using database url: ${config.url}")
+    log.info("Using database host: ${config.host}")
 
     val connectionFactory = if (mode == "test") {
         // H2 in-memory for local/test
@@ -37,13 +36,13 @@ fun Application.database() {
         // PostgreSQL for production (Render internal)
         val options = ConnectionFactoryOptions.builder()
             .option(ConnectionFactoryOptions.DRIVER, "postgresql")
-            .option(ConnectionFactoryOptions.HOST, config.url)
-            .option(ConnectionFactoryOptions.PORT, 5432)
-            .option(ConnectionFactoryOptions.DATABASE, "db_ktor_chat")
+            .option(ConnectionFactoryOptions.HOST, config.host)
+            .option(ConnectionFactoryOptions.PORT, config.port)
+            .option(ConnectionFactoryOptions.DATABASE, config.database)
             .option(ConnectionFactoryOptions.USER, config.user)
             .option(ConnectionFactoryOptions.PASSWORD, config.password)
-            .option(ConnectionFactoryOptions.SSL, true)
-            .option(ConnectionFactoryOptions.CONNECT_TIMEOUT, Duration.ofSeconds(1000))
+            .option(ConnectionFactoryOptions.SSL, config.secure)
+            //.option(ConnectionFactoryOptions.CONNECT_TIMEOUT, Duration.ofSeconds(1000))
             .build()
         ConnectionFactories.get(options)
 
@@ -72,7 +71,10 @@ fun Application.database() {
 
 @Serializable
 data class DatabaseConfig(
-    val url: String,
+    val host: String,
+    val database: String,
+    val port: Int = 5432,
+    val secure: Boolean,
     val user: String,
     val driver: String,
     val password: String
