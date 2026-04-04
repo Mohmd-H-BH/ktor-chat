@@ -13,6 +13,8 @@ ktor {
 dependencies {
     implementation(project(":server:common"))
     implementation(ktorLibs.server.statusPages)
+    implementation(ktorLibs.server.forwardedHeader)
+
     implementation(ktorLibs.server.websockets)
     implementation(ktorLibs.server.cors)
     implementation(ktorLibs.server.swagger)

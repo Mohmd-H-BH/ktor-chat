@@ -7,6 +7,8 @@ import io.ktor.server.application.*
 import io.ktor.server.plugins.*
 import io.ktor.server.plugins.contentnegotiation.*
 import io.ktor.server.plugins.cors.routing.CORS
+import io.ktor.server.plugins.forwardedheaders.ForwardedHeaders
+import io.ktor.server.plugins.forwardedheaders.XForwardedHeaders
 import io.ktor.server.plugins.statuspages.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
@@ -28,6 +30,12 @@ import kotlinx.serialization.modules.SerializersModule
 fun Application.rest() {
     val port = environment.config.propertyOrNull("ktor.deployment.port")?.getString()
     log.info("Ktor Chat Server is starting on port: $port")
+
+    install(ForwardedHeaders)
+    install(XForwardedHeaders) /*{
+        useFirstProxy()
+    }*/
+
     install(CORS) {
         allowNonSimpleContentTypes = true
         allowCredentials = true
