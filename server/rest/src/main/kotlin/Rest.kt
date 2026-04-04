@@ -26,6 +26,8 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.modules.SerializersModule
 
 fun Application.rest() {
+    val port = environment.config.propertyOrNull("ktor.deployment.port")?.getString()
+    log.info("Ktor Chat Server is starting on port: $port")
     install(CORS) {
         allowNonSimpleContentTypes = true
         allowCredentials = true
